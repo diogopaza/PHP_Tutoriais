@@ -1,4 +1,39 @@
 <?php
-    echo "Olá estou rodando";
+   include_once "conexao.php";
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <?php
+        $query_valor_venda = "SELECT SUM(quantidade * preco_venda) AS valor_estoque_venda FROM produtos";
+        $result = $conn->prepare($query_valor_venda);
+        $result -> execute();
+
+        $row_valor_venda = $result->fetch(PDO::FETCH_ASSOC);
+        echo "Valor do estoque (venda) ". number_format($row_valor_venda['valor_estoque_venda'], 2, ",", ".");        
+        echo "<br><br>";
+
+        $query_valor_compra = "SELECT SUM(quantidade * preco_compra) AS valor_estoque_compra FROM produtos";
+        $result = $conn->prepare($query_valor_compra);
+        $result -> execute();
+
+        $row_valor_compra = $result->fetch(PDO::FETCH_ASSOC);
+        echo "Valor do estoque (compra) ". number_format($row_valor_compra['valor_estoque_compra'], 2, ",", ".");        
+        echo "<br><br>";
+
+        $lucro = $row_valor_venda['valor_estoque_venda'] - $row_valor_compra['valor_estoque_compra'];
+        echo "Lucro: " . number_format($lucro,2,",","." );
+
+
+
+
+    ?>
+</body>
+</html>
