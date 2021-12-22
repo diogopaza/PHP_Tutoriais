@@ -1,6 +1,6 @@
 <?php
     try{
-        $conn = new PDO('mysql:host=localhost;dbname=celke', "root", "");
+        $conn = new PDO('mysql:host=localhost;dbname=celke', "root", "password");
         //echo "Conexão realizada com sucesso";
        
     }catch(PDOException $e){

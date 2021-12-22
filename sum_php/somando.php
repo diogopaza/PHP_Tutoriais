@@ -11,7 +11,10 @@
     <title>Document</title>
 </head>
 <body>
+    
     <?php
+   
+    
         $query_valor_venda = "SELECT SUM(quantidade * preco_venda) AS valor_estoque_venda FROM produtos";
         $result = $conn->prepare($query_valor_venda);
         $result -> execute();
@@ -31,7 +34,13 @@
         $lucro = $row_valor_venda['valor_estoque_venda'] - $row_valor_compra['valor_estoque_compra'];
         echo "Lucro: " . number_format($lucro,2,",","." );
 
-
+        echo "<hr>";
+        echo "<form method= action=>";
+            echo "<select name=>";
+                echo "<option value=>Televisao</option>";
+                echo "<option value=>Notebook</option>";
+            echo "</select>";
+        echo "</form>"
 
 
     ?>
