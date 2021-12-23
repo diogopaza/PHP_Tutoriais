@@ -33,16 +33,45 @@
 
         $lucro = $row_valor_venda['valor_estoque_venda'] - $row_valor_compra['valor_estoque_compra'];
         echo "Lucro: " . number_format($lucro,2,",","." );
-
         echo "<hr>";
-        echo "<form method= action=>";
-            echo "<select name=>";
-                echo "<option value=>Televisao</option>";
-                echo "<option value=>Notebook</option>";
+
+        
+            echo "<select id='selecao_produtos' onchange='alterarProduto()'>";
+                 //percorrendo banco
+                $rs= $conn->query("SELECT * FROM produtos");
+                while($row_produtos= $rs->fetch(PDO::FETCH_OBJ)){
+                    echo "<option value=".$row->id.">".$row_produtos->nome."</option>";           
+                }                    
             echo "</select>";
-        echo "</form>"
+            echo "<br><br>";
+
+       echo "<div id='mostra_produtos'>";
+               // echo "<p3>Nome:". $rows->nome . "</p3><br>";
+                //echo "<p3>Quantidade: ". $rows->nome . " </p3><br>";
+                //echo "<p3>Valor de Venda: ". $rows->nome . " </p3><br>";
+       echo "</div>";
 
 
     ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script>
+<script src="//cdn.jsdelivr.net/bluebird/3.5.0/bluebird.min.js"></script>
+<script>
+    function alterarProduto() {       
+        var formData = new FormData();
+        formData.append('id', '10');
+
+fetch("http://localhost/PHP_Tutoriais/sum_php/retornaProduto.php",
+ { method: 'POST', body: formData })
+.then(function (response) {
+  return response.text();
+})
+.then(function (body) {
+  console.log(body);
+});
+    }
+
+
+</script>
 </body>
+
 </html>
