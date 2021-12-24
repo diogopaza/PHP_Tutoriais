@@ -8,3 +8,5 @@ Exemplo:
  
 A segunda parte do estuda é criado um combobox com uso de HTML. O combobox é preenchido automaticamente através de busca no banco de dados.
 Abaixo foi criada uma DIV e esta de acordo com o campo selecionado no combox box mostra os campos nome,quantidade e valor de venda com seus respectivos valores armazenados no banco de dados. 
+
+![Screenshot](captura.png)
