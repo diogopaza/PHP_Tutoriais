@@ -37,6 +37,7 @@
 
         
             echo "<select id='combo_produtos' onchange='alterarProduto()'>";
+                echo "<option></option>";
                  //percorrendo banco
                 $rs= $conn->query("SELECT * FROM produtos");
                 while($row_produtos= $rs->fetch(PDO::FETCH_OBJ)){
