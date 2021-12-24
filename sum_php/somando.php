@@ -36,19 +36,19 @@
         echo "<hr>";
 
         
-            echo "<select id='selecao_produtos' onchange='alterarProduto()'>";
+            echo "<select id='combo_produtos' onchange='alterarProduto()'>";
                  //percorrendo banco
                 $rs= $conn->query("SELECT * FROM produtos");
                 while($row_produtos= $rs->fetch(PDO::FETCH_OBJ)){
-                    echo "<option value=".$row->id.">".$row_produtos->nome."</option>";           
+                    echo "<option value=" . $row_produtos->id . ">".$row_produtos->nome."</option>";           
                 }                    
             echo "</select>";
             echo "<br><br>";
 
        echo "<div id='mostra_produtos'>";
-               // echo "<p3>Nome:". $rows->nome . "</p3><br>";
-                //echo "<p3>Quantidade: ". $rows->nome . " </p3><br>";
-                //echo "<p3>Valor de Venda: ". $rows->nome . " </p3><br>";
+               echo "<label id='labelNome'>Nome: </label><br>";
+               echo "<label id='labelQuantidade'>Quantidade:  </label><br>";
+               echo "<label id='labelValorVenda'>Valor de Venda:  </label><br>";
        echo "</div>";
 
 
@@ -57,18 +57,30 @@
 <script src="//cdn.jsdelivr.net/bluebird/3.5.0/bluebird.min.js"></script>
 <script>
     function alterarProduto() {       
+        
+        comboBox = document.getElementById("combo_produtos");
+        var id = comboBox.options[comboBox.selectedIndex].value;
         var formData = new FormData();
-        formData.append('id', '10');
-
+        formData.append('id', id);
+     
 fetch("http://localhost/PHP_Tutoriais/sum_php/retornaProduto.php",
- { method: 'POST', body: formData })
+{ method: 'POST',
+  body: formData,  
+})
 .then(function (response) {
   return response.text();
 })
 .then(function (body) {
-  console.log(body);
+ console.log(body);
+ 
+  const obj = JSON.parse(body);
+  labelNome = document.getElementById('labelNome').innerHTML = "Nome: " + obj.nome;
+  labelNome = document.getElementById('labelQuantidade').innerHTML = "Quantidade: " + obj.quantidade;
+  labelNome = document.getElementById('labelValorVenda').innerHTML = "Valor de Venda: " + obj.valorVenda;
+ 
 });
     }
+    
 
 
 </script>
